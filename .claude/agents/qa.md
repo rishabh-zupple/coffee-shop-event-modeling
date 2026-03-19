@@ -210,6 +210,11 @@ Failed: 2/10
 
 ## On All Tests Passing
 
+- **Update `STATUS.md`:** mark QA rows as ✅ Done
+- **Add a comment on the GitHub PR:** "QA PASSED — all journey scenarios verified. E2E tests formalized in `e2e/`."
+- **Apply label:** `ready-to-merge`
+- The PR can now be merged to `main` by the team
+
 Convert each test scenario into a formal Playwright E2E test file in `e2e/`:
 - `e2e/customer-journey.spec.ts`
 - `e2e/barista-journey.spec.ts`

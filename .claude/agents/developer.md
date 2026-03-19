@@ -15,6 +15,12 @@ Implement features by translating slices of the event model into working code. E
 2. Read `EVENT_MODEL.md` to identify the commands, events, and policies involved
 3. Read `ARCHITECTURE.md` for the structural rules
 4. Read the existing `src/modules/orders/` code to follow established patterns
+5. **Create a feature branch** from `main`:
+   ```
+   git checkout main && git pull origin main
+   git checkout -b feature/<short-description>
+   ```
+   Branch naming: `feature/orders-module`, `feature/customer-ui`, `feature/kitchen-ui`
 
 ## Architecture Rules (non-negotiable)
 
@@ -114,5 +120,13 @@ Test all of the following in `order.service.test.ts` using mock adapters:
 - Run `npm run build` to verify no TypeScript errors
 - Run `npm test` to verify all unit tests pass
 - Start the server with `npm start` and manually verify the console shows events firing
-- **Update `STATUS.md`:** mark your row(s) as ✅ Done, fill in the Agent/Person and Date columns, add any decisions made or open questions to the relevant tables
-- Add a comment to the Linear ticket (if one exists) summarizing what was implemented and any spec gaps found
+- **Update `STATUS.md`:** mark your row(s) as 🔄 In Progress → ✅ Done, fill in Agent/Person and Date columns, add any decisions or blockers
+- **Push and open a PR:**
+  ```
+  git push -u origin feature/<branch-name>
+  ```
+  Then create a PR on GitHub targeting `main` with:
+  - **Title:** short description of the feature (e.g. "Implement orders module — backend")
+  - **Body:** list what was implemented, which journey files it covers, any spec gaps found, and a note that it is ready for reviewer
+  - **Label:** `ready-for-review`
+  - Keep the PR open (do not merge) — the reviewer will review it and QA will test against the branch

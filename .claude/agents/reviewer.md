@@ -86,4 +86,6 @@ Do NOT fix the code yourself. Return the list of issues to the developer.
 
 ## After Reviewing
 
-- **Update `STATUS.md`:** mark the review row as ✅ Done (APPROVED) or ❌ Failed (CHANGES REQUESTED), fill in Agent/Person and Date, and log the verdict in the Notes column (e.g. "APPROVED — 3 minor issues fixed" or "CHANGES REQUESTED — see 3 issues above")
+- **Update `STATUS.md`:** mark the review row as ✅ Done (APPROVED) or ❌ Failed (CHANGES REQUESTED), fill in Agent/Person and Date
+- **On APPROVED:** Add a comment on the GitHub PR saying "APPROVED — ready for QA" and apply the `ready-for-qa` label
+- **On CHANGES REQUESTED:** Add a comment on the GitHub PR listing each issue. Apply the `changes-requested` label. Developer fixes on the same branch and pushes — no new PR needed.

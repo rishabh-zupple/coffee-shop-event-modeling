@@ -32,11 +32,13 @@ Before any code is written:
 **Invoke:** `@developer implement <feature>`
 
 The developer agent:
+- Creates a feature branch from `main` (`feature/<short-description>`)
 - Reads journey files and EVENT_MODEL.md
 - Implements ports → domain → adapters → routes → tests
 - Follows ARCHITECTURE.md rules strictly
 - Runs `npm test` and `npm run build` before finishing
-- Reports any spec gaps found
+- Pushes the branch and opens a PR targeting `main`
+- Updates STATUS.md and reports any spec gaps found
 
 ---
 
@@ -49,6 +51,7 @@ The reviewer agent:
 - Verifies architecture rules (no domain→infra imports, thin routes, etc.)
 - Verifies state machine completeness
 - Returns APPROVED or CHANGES REQUESTED with a specific list
+- Comments verdict on the GitHub PR and applies the appropriate label
 
 ---
 
@@ -61,6 +64,7 @@ The QA agent:
 - Tests against the live running app (backend + frontend both must be running)
 - Reports PASS/FAIL per scenario with reproduction steps for failures
 - Failures go back to developer — not directly to reviewer
+- On all passing: comments on the GitHub PR and applies `ready-to-merge` label
 
 ---
 
@@ -71,6 +75,39 @@ Once all QA scenarios pass:
 - QA agent converts manual Playwright steps into `e2e/*.spec.ts` test files
 - Tests are runnable via `npx playwright test`
 - These catch regressions on future changes
+
+---
+
+## Branching & PR Strategy
+
+| Rule | Detail |
+|---|---|
+| `main` is always stable | Never commit directly to `main` |
+| One branch per feature | `feature/<short-description>` (e.g. `feature/orders-module`) |
+| Branch from `main` | Always `git checkout main && git pull` before branching |
+| One PR per branch | PR targets `main`, stays open until QA passes |
+| PR labels | `ready-for-review` → `changes-requested` / `ready-for-qa` → `ready-to-merge` |
+| Merge only after QA | PR is merged to `main` only when QA agent marks it `ready-to-merge` |
+
+**PR body template (developer fills this in):**
+```
+## What this implements
+- <feature or journey file covered>
+
+## Journey files covered
+- journeys/<x>-journey.md — scenarios: <list>
+
+## How to test
+1. `npm install && npm run dev`
+2. Open http://localhost:3001
+
+## Spec gaps found
+- <any EVENT_MODEL.md inconsistencies noticed>
+
+## Ready for
+- [ ] Reviewer
+- [ ] QA
+```
 
 ---
 
