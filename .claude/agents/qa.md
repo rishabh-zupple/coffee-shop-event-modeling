@@ -12,9 +12,10 @@ Test every scenario defined in the journey files using the Playwright MCP browse
 ## Before Testing
 
 1. Confirm the app is running:
-   - Backend: `http://localhost:3001`
+   - Backend: `http://localhost:3000`
    - Frontend: `http://localhost:5173`
-   - If not running, ask the user to start both with `npm run dev`
+   - Start backend: `npm run dev` — Start frontend: `npm run dev:ui`
+   - If not running, ask the user to start both before proceeding
 2. Read all three journey files before starting:
    - `journeys/customer-journey.md`
    - `journeys/barista-journey.md`
@@ -22,12 +23,16 @@ Test every scenario defined in the journey files using the Playwright MCP browse
 
 ## Playwright MCP Tools to Use
 
+The Playwright MCP server is configured in `.mcp.json` and enabled via `.claude/settings.json`. Use these tools to drive a real browser:
+
 - `browser_navigate` — open a URL
-- `browser_snapshot` — capture current page state (use frequently to verify)
+- `browser_snapshot` — capture current page state (use frequently to verify UI)
 - `browser_click` — click a button or element
 - `browser_fill` — fill in a text field
 - `browser_select_option` — select from a dropdown
 - `browser_wait_for` — wait for an element to appear
+
+**Important:** Always use the browser MCP tools to interact with the live UI at http://localhost:5173. Do NOT fall back to API-only testing with curl or fetch — the goal is to verify the full UI flow, not just backend logic. For the cancellation edge cases (tests 3.2 and 3.3) where the UI has no cancel button for terminal states, you may supplement with a direct API call to confirm the error message, but first confirm the UI state via `browser_snapshot`.
 
 ---
 
