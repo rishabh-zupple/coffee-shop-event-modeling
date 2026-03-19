@@ -114,4 +114,5 @@ Test all of the following in `order.service.test.ts` using mock adapters:
 - Run `npm run build` to verify no TypeScript errors
 - Run `npm test` to verify all unit tests pass
 - Start the server with `npm start` and manually verify the console shows events firing
+- **Update `STATUS.md`:** mark your row(s) as ✅ Done, fill in the Agent/Person and Date columns, add any decisions made or open questions to the relevant tables
 - Add a comment to the Linear ticket (if one exists) summarizing what was implemented and any spec gaps found

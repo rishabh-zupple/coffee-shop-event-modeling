@@ -201,6 +201,13 @@ Failed: 2/10
 2. Test 2.3: READY orders not visually distinguished from PENDING
 ```
 
+## After Testing (Pass or Fail)
+
+**Always update `STATUS.md`:**
+- Mark QA rows as ✅ Done (all pass), 🔄 In Progress, or ❌ Failed
+- Fill in Agent/Person and Date columns
+- If failures: add them to the Open Questions / Blockers table with reproduction steps
+
 ## On All Tests Passing
 
 Convert each test scenario into a formal Playwright E2E test file in `e2e/`:
