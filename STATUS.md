@@ -19,7 +19,7 @@
 | # | Feature / Task | Phase | Status | Agent / Person | Date | Notes |
 |---|---|---|---|---|---|---|
 | 1 | Project scaffold & event model | Setup | ✅ Done | Rishabh | 2026-03-19 | EVENT_MODEL.md, journey files, agent configs created |
-| 2 | Orders module — backend | Development | ⬜ Not started | — | — | Ports, domain, adapters, routes, unit tests |
+| 2 | Orders module — backend | Development | ✅ Done | developer agent | 2026-03-19 | Ports, domain, adapters, routes, unit tests — all 10 tests pass, build clean |
 | 3 | Orders module — review | Review | ⬜ Blocked | — | — | Waiting on #2 |
 | 4 | Customer UI | Development | ⬜ Not started | — | — | Place order form + order status page |
 | 5 | Kitchen display UI | Development | ⬜ Not started | — | — | Barista view, accept/ready/cancel buttons |
