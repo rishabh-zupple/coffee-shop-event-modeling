@@ -108,7 +108,7 @@ describe('OrderService', () => {
       service = new OrderService(repo, emitter, notifications);
 
       await expect(service.acceptOrder({ orderId: 'order-001' })).rejects.toThrow(
-        /Cannot accept an order with status ACCEPTED/,
+        'Cannot accept an order that is not pending',
       );
     });
   });
@@ -158,7 +158,7 @@ describe('OrderService', () => {
       service = new OrderService(repo, emitter, notifications);
 
       await expect(service.collectOrder({ orderId: 'order-001' })).rejects.toThrow(
-        /Cannot collect an order with status PENDING/,
+        'Cannot collect an order that is not ready',
       );
     });
   });
@@ -205,7 +205,7 @@ describe('OrderService', () => {
 
       await expect(
         service.cancelOrder({ orderId: 'order-001', reason: 'test' }),
-      ).rejects.toThrow(/Cannot cancel an order with status READY/);
+      ).rejects.toThrow('Cannot cancel an order that is ready for collection');
     });
 
     it('throws when order is COLLECTED', async () => {
@@ -215,7 +215,7 @@ describe('OrderService', () => {
 
       await expect(
         service.cancelOrder({ orderId: 'order-001', reason: 'test' }),
-      ).rejects.toThrow(/Cannot cancel an order with status COLLECTED/);
+      ).rejects.toThrow('Cannot cancel an order that is already collected');
     });
   });
 });

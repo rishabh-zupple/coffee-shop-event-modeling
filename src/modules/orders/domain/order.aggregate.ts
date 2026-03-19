@@ -45,9 +45,7 @@ export function acceptOrder(
   acceptedAt: Date,
 ): { order: Order; event: OrderAcceptedEvent } {
   if (order.status !== OrderStatus.PENDING) {
-    throw new Error(
-      `Cannot accept an order with status ${order.status}`,
-    );
+    throw new Error('Cannot accept an order that is not pending');
   }
 
   const updated: Order = { ...order, status: OrderStatus.ACCEPTED, acceptedAt };
@@ -66,9 +64,7 @@ export function markOrderReady(
   readyAt: Date,
 ): { order: Order; event: OrderReadyEvent } {
   if (order.status !== OrderStatus.ACCEPTED) {
-    throw new Error(
-      `Cannot mark ready an order with status ${order.status}`,
-    );
+    throw new Error('Cannot mark ready an order that is not accepted');
   }
 
   const updated: Order = { ...order, status: OrderStatus.READY, readyAt };
@@ -87,9 +83,7 @@ export function collectOrder(
   collectedAt: Date,
 ): { order: Order; event: OrderCollectedEvent } {
   if (order.status !== OrderStatus.READY) {
-    throw new Error(
-      `Cannot collect an order with status ${order.status}`,
-    );
+    throw new Error('Cannot collect an order that is not ready');
   }
 
   const updated: Order = { ...order, status: OrderStatus.COLLECTED, collectedAt };
@@ -108,13 +102,14 @@ export function cancelOrder(
   reason: string,
   cancelledAt: Date,
 ): { order: Order; event: OrderCancelledEvent } {
-  if (
-    order.status !== OrderStatus.PENDING &&
-    order.status !== OrderStatus.ACCEPTED
-  ) {
-    throw new Error(
-      `Cannot cancel an order with status ${order.status}`,
-    );
+  if (order.status === OrderStatus.COLLECTED) {
+    throw new Error('Cannot cancel an order that is already collected');
+  }
+  if (order.status === OrderStatus.CANCELLED) {
+    throw new Error('Order is already cancelled');
+  }
+  if (order.status === OrderStatus.READY) {
+    throw new Error('Cannot cancel an order that is ready for collection');
   }
 
   const updated: Order = {
